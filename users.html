@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('bg water.png');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #007bb5 0%, #007bb5 100%);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid #007bb5;
+        }
+
+        .header img {
+            height: 60px;
+            border-radius: 50%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .header img:hover {
+            transform: scale(1.1); 
+        }
+
+        .header nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0; 
+        }
+
+        .header nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 15px;
+            margin: 0 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .header nav a:hover {
+            background-color: #0bb8f75b;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .custom-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .custom-user {
+            background-color: #1abc9c;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .custom-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+            right: 0;
+        }
+
+        .custom-dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .custom-dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .custom-dropdown:hover .custom-dropdown-content {
+            display: block;
+        }
+
+        .container {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.952);
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .usersrecords-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #007bb5;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .stats div {
+            text-align: center;
+        }
+        .stats i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .filter-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px; 
+            background-color: #f8f9fa; 
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-section select, .filter-section input {
+            margin: 0 10px; 
+            padding: 10px; 
+            font-size: 16px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+        }
+
+        .filter-section .total-users {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-section .total-users i {
+            margin-right: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #dddddd;
+            background-color: rgba(255, 255, 255, 0.066);
+        }
+
+        table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1; 
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px; 
+        }
+
+        .action-buttons i {
+            cursor: pointer;
+            color: #3498db; 
+            transition: color 0.3s;
+        }
+
+        .action-buttons i:hover {
+            color: #e74c3c; 
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block; 
+            }
+
+            th {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                margin-bottom: 15px; 
+            }
+
+            td {
+                text-align: right;
+                padding-left: 50%; 
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label); 
+                position: absolute;
+                left: 10px;
+                width: calc(50% - 20px);
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="Logo.png" alt="Company Logo" />
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="customers.html">Customers</a>
+            <a href="announcement.html">Announcement</a>
+            <a class="active" href="#">Users</a>       
+        </nav>
+        <div class="custom-dropdown">
+            <div class="custom-user">W.B.S.I.S.H.V</div>
+            <div class="custom-dropdown-content">
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="#"><i class="fas fa-dollar-sign"></i> Income</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="usersrecords-title">USER'S RECORDS:</div>
+        <div class="stats">
+            <div>
+                <i class="fas fa-file-invoice"></i>
+                <div>Total Users: 2</div>
+            </div>
+            <div>
+                <i class="fas fa-dollar-sign"></i>
+                <div>Total Admin Users: 1</div>
+            </div>
+            <div>
+                <i class="fas fa-money-bill-alt"></i>
+                <div>Total Customers Users:</div>
+            </div>
+            </div>
+        <div class="filter-section">
+            <label for="filter">
+                <i class="fas fa-filter"></i>
+                Filter By:
+            </label>
+            <select id="filter">
+                <option value="all">All</option>
+                
+            </select>
+            <input id="searchusersrecords" placeholder="Search users.." type="text"/>
+    
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>FIRST NAME</th>
+                        <th>LAST NAME</th>
+                        <th>CONTACT NO</th>
+                        <th>METER NO</th>
+                        <th>USER TYPE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="FIRST NAME">WBSI</td>
+                        <td data-label="LAST NAME">SHV</td>
+                        <td data-label="CONTACT NO">09093854426</td>
+                        <td data-label="METER NO">WBSISHV</td>
+                        <td data-label="USER TYPE">Admin</td>
+                        
+                    </tr>
+                    <tr>
+                        <td data-label="FIRST NAME">Hana</td>
+                        <td data-label="LAST NAME">Bishi</td>
+                        <td data-label="CONTACT NO">09613372107</td>
+                        <td data-label="METER NO">P3-36</td>
+                        <td data-label="USER TYPE">User</td>
+                        <td class="action-buttons">
+                            <a href="usersediticon.html?id=12"><i class="fas fa-edit"></i></a>
+                            <i class="fas fa-trash" onclick="deleteRow(this)"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="FIRST NAME">Juana</td>
+                        <td data-label="LAST NAME">Cruz</td>
+                        <td data-label="CONTACT NO">09637472107</td>
+                        <td data-label="METER NO">P1-70</td>
+                        <td data-label="USER TYPE">User</td>
+                        <td class="action-buttons">
+                            <a href="usersediticon.html?id=12"><i class="fas fa-edit"></i></a>
+                            <i class="fas fa-trash" onclick="deleteRow(this)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.getElementById('searchusersrecords').addEventListener('input', filterUsersrecords);
+
+    function filterUsersrecords() {
+    const searchValue = document.getElementById('searchusersrecords').value.toLowerCase();
+    const rows = document.querySelectorAll('table tbody tr');
+
+    rows.forEach(row => {
+        const firstNameText = row.cells[0].textContent.toLowerCase();
+        const lastNameText = row.cells[1].textContent.toLowerCase();
+        const contactText = row.cells[2].textContent.toLowerCase();
+        const usertypeText = row.cells[4].textContent.toLowerCase();  
+
+        const showRow = firstNameText.includes(searchValue) || lastNameText.includes(searchValue) ||
+                        contactText.includes(searchValue) || usertypeText.includes(searchValue);
+        row.style.display = showRow ? '' : 'none';
+    });
+
+        }
+
+        function deleteRow(element) {
+            const row = element.closest('tr');
+            if (row) {
+                row.remove();
+            }
+        }
+    </script>
+</body>
+</html>

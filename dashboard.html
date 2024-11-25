@@ -1,0 +1,455 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Users</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              background-image: url('bg water.png');
+              background-size: cover;
+              margin: 0;
+              padding: 0;
+              color: #333;
+          }
+
+          .header {
+              background: linear-gradient(135deg, #007bb5 0%, #007bb5 100%);
+              padding: 15px 20px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+              border-bottom: 2px solid #007bb5;
+          }
+
+          .header img {
+              height: 60px;
+              border-radius: 50%;
+              transition: transform 0.3s ease-in-out;
+          }
+
+          .header img:hover {
+              transform: scale(1.1);
+          }
+
+          .header h1 {
+              margin: 0;
+              font-size: 24px;
+              color: #ffffff;
+              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          }
+
+          .header nav {
+              display: flex;
+              align-items: center;
+              justify-content: space-around;
+              background-color: #007bb5;
+          }
+
+          
+          .header nav a {
+              text-decoration: none;
+              color: white;
+              font-size: 18px;
+              font-weight: bold;
+              padding: 10px 15px;
+              margin: 0 15px;
+              border-radius: 5px;
+              transition: all 0.3s ease-in-out;
+          }
+
+          .header nav a:hover {
+              background-color: #0bb8f75b;
+              transform: scale(1.1);
+          }
+
+          .header .custom-user {
+            background-color: #1abc9c;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+          }
+
+          .custom-dropdown-content {
+              display: none;
+              position: absolute;
+              background-color: #f9f9f9;
+              box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+              border-radius: 5px;
+              min-width: 160px;
+              z-index: 1;
+          }
+
+          .custom-dropdown-content a {
+              padding: 12px 16px;
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              color: black;
+          }
+
+          .custom-dropdown-content a i {
+              margin-right: 10px; 
+          }
+
+          .custom-dropdown-content a:hover {
+              background-color: #ddd;
+          }
+
+          .custom-dropdown:hover .custom-dropdown-content {
+              display: block;
+          }
+          
+          .content {
+              padding: 20px;
+              background: rgba(255, 255, 255, 0.9);
+              border-radius: 5px;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+              max-width : 1200px;
+              margin: 20px auto;
+          }
+
+          .dashboard-title {
+              font-size: 24px;
+              font-weight: bold;
+              margin-bottom: 20px;
+              color: #007bb5;
+          }
+
+          .stats {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 20px;
+              margin-bottom: 60px;
+          }
+
+          .stat-box {
+              background-color: #ffffff;
+              border: 1px solid #0073e6;
+              border-radius: 10px;
+              padding: 20px;
+              text-align: center;
+              font-size: 18px;
+              color: #007bb5;
+              transition: transform 0.3s, box-shadow 0.3s;
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          }
+
+          .stat-box:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          }
+
+          .stat-box .number {
+              font-size: 48px;
+              color: #000;
+          }
+
+          .calendar {
+              margin-top: 0px;
+              background-color: #f7f7f7;
+              padding: 10px;
+              border-radius: 0px;
+              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+          }
+
+          .calendar-controls {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 20px;
+              align-items: center;
+          }
+
+          .calendar-controls button {
+              background-color: #007bb5;
+              color: white;
+              border: none;
+              padding: 10px 20px;
+              border-radius: 0px;
+              cursor: pointer;
+              transition: background-color 0.3s;
+          }
+
+          .calendar-controls button:hover {
+              background-color: #005f8c;
+          }
+
+          .calendar-controls h2 {
+              font-size: 35px;
+              font-weight: 700;
+              margin: 0 10px;
+          }
+
+          .calendar table {
+              width: 100%;
+              border-collapse: separate;
+              border-spacing: 0 10px;
+          }
+
+          .calendar thead th {
+              background-color: #007bb5;
+              color: white;
+              padding: 10px;
+              text-align: center;
+              border-radius: 5px 5px 0 0;
+          }
+
+          .calendar tbody td {
+              padding: 10px;
+              text-align: center;
+              border-radius: 15px;
+              transition: background-color 0.3s;
+              cursor: pointer;
+          }
+
+          .calendar tbody td.today {
+              background-color: #00a2ff;
+              color: rgb(232, 8, 8);
+              font-weight: 700;
+          }
+
+          .calendar tbody td:hover {
+              background-color: #e0f7ff;
+          }
+
+          .calendar tbody tr:nth-child(even) td {
+              background-color: #f2f9ff;
+          }
+
+          .note-modal {
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0,0,0,0.5);
+              justify-content: center;
+              align-items: center;
+          }
+
+          .note-modal-content {
+              background-color: white;
+              padding: 20px;
+              border-radius: 10px;
+              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+          }
+
+          .note-modal textarea {
+              width: 100%;
+              height: 100px;
+              margin-top: 10px;
+          }
+
+          .note-modal button {
+              margin-top: 10px;
+              background-color: #007bb5;
+              color: white;
+              border: none;
+              padding: 10px;
+              border-radius: 5px;
+              cursor: pointer;
+          }
+
+          .note-modal button:hover {
+              background-color: #005f8c;
+          }
+
+          .clock {
+              background-color: #007cb500;
+              color: rgb(11, 117, 149);
+              font-size: 24px;
+              font-weight: bold;
+              padding: 0px;
+              border-radius: 10px;
+              text-align: center;
+              margin: 1px 0;
+              box-shadow: 0 0px 0 0, rgba(0, 0, 0, 0.2);
+          }
+
+          .dropdown {
+              position: relative;
+              display: inline-block;    
+              cursor: pointer;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="header">
+          <img alt="Company Logo" height="50" src="Logo.png" />
+          <nav>
+              <a href="dashboard.html" class="active">Dashboard</a>
+              <a href="customers.html">Customers</a>
+              <a href="announcement.html">Announcement</a>
+              <a href="users.html">Users</a>
+          </nav>
+          <div class="custom-dropdown">
+              <div class="custom-user">W.B.S.I.S.H.V</div>
+              <div class="custom-dropdown-content">
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="#"><i class="fas fa-dollar-sign"></i> Income</a>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+              </div>
+          </div>
+      </div>
+      <div class="content">
+          <div class="dashboard-title">DASHBOARD:</div>
+          <div class="stats">
+              <div class="stat-box">
+                  Total Customers:
+                  <div class="number" id="totalCustomers">2</div>
+              </div>
+              <div class="stat-box">
+                  Total Users:
+                  <div class="number" id="totalClients">0</div>
+              </div>
+              <div class="stat-box">
+                  Unpaid Bills:
+                  <div class="number" id="unpaidBills">0</div>
+              </div>
+          </div>
+          <div class="calendar">
+              <div class="calendar-controls">
+                  <button id="prevMonth">Previous</button>
+                  <h2 id="monthYear">November 2024</h2>
+                  <button id="nextMonth">Next</button>
+              </div>
+              <div class="clock" id="clock">Loading...</div>
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Sun</th>
+                          <th>Mon</th>
+                          <th>Tue</th>
+                          <th>Wed</th>
+                          <th>Thu</th>
+                          <th>Fri</th>
+                          <th>Sat</th>
+                      </tr>
+                  </thead>
+                  <tbody id="calendarBody">
+
+                </tbody>
+              </table>
+          </div>
+      </div>
+
+      <div class="note-modal" id="noteModal">
+          <div class="note-modal-content">
+              <h3>Add Note for <span id="noteDate"></span></h3>
+              <textarea id="noteText" placeholder="Write your note here..."></textarea>
+              <button id="saveNote">Save Note</button>
+              <button id="closeModal">Close</button>
+          </div>
+      </div>
+
+      <script>
+          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          let currentMonth = 10; 
+          let currentYear = 2024;
+          let selectedDate = null;
+
+          function generateCalendar(month, year) {
+              const firstDay = new Date(year, month, 1).getDay();
+              const daysInMonth = new Date(year, month + 1, 0).getDate();
+              const calendarBody = document.getElementById('calendarBody');
+              calendarBody.innerHTML = '';
+
+              let row = document.createElement('tr');
+              for (let i = 0; i < firstDay; i++) {
+                  row.appendChild(document.createElement('td'));
+              }
+
+              for (let day = 1; day <= daysInMonth; day++) {
+                  if (row.children.length === 7) {
+                      calendarBody.appendChild(row);
+                      row = document.createElement('tr');
+                  }
+                  const cell = document.createElement('td');
+                  cell.textContent = day;
+                  cell.onclick = () => openNoteModal(day);
+
+                  if (day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
+                      cell.classList.add('today');
+                  }
+
+                  row.appendChild(cell);
+              }
+              calendarBody.appendChild(row);
+              document.getElementById('monthYear').textContent = `${monthNames[month]} ${year}`;
+          }
+
+          function openNoteModal (day) {
+              selectedDate = day;
+              document.getElementById('noteDate').textContent = `${day} ${monthNames[currentMonth]} ${currentYear}`;
+              document.getElementById('noteText').value = '';
+              document.getElementById('noteModal').style.display = 'flex';
+          }
+
+          document.getElementById('saveNote').addEventListener('click', () => {
+              const noteText = document.getElementById('noteText').value;
+              if (noteText) {
+                  localStorage.setItem(`note-${selectedDate}-${currentMonth}-${currentYear}`, noteText);
+                  alert('Note saved!');
+                  closeNoteModal();
+              }
+          });
+
+          document.getElementById('closeModal').addEventListener('click', closeNoteModal);
+
+          function closeNoteModal() {
+              document.getElementById('noteModal').style.display = 'none';
+          }
+
+          document.getElementById('prevMonth').addEventListener('click', () => {
+              if (currentMonth === 0) {
+                  currentMonth = 11;
+                  currentYear--;
+              } else {
+                  currentMonth--;
+              }
+              generateCalendar(currentMonth, currentYear);
+          });
+
+          document.getElementById('nextMonth').addEventListener('click', () => {
+              if (currentMonth === 11) {
+                  currentMonth = 0;
+                  currentYear++;
+              } else {
+                  currentMonth++;
+              }
+              generateCalendar(currentMonth, currentYear);
+          });
+
+          generateCalendar(currentMonth, currentYear);
+
+          function updateDashboard() {
+              const totalCustomers = localStorage.getItem('totalCustomers') || 0;
+              const totalClients = localStorage.getItem('totalClients') || 0;
+              const unpaidBills = localStorage.getItem('unpaidBills') || 0;
+
+              document.getElementById('totalCustomers').innerText = totalCustomers;
+              document.getElementById('totalClients').innerText = totalClients;
+              document.getElementById('unpaidBills').innerText = unpaidBills;
+          }
+
+          window.onload = updateDashboard;
+
+          function updateClock() {
+              const options = { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+              const now = new Date().toLocaleTimeString('en-US', options);
+              document.getElementById('clock').textContent = now;
+          }
+
+          setInterval(updateClock, 1000);
+          updateClock();
+      </script>
+  </body>
+  </html>

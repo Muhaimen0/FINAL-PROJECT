@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Log In</title>
+  <style>
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(45deg, #A8C4D1, #E4F4F9); 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .login-container {
+      display: flex;
+      flex-direction: row;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 80%;
+      max-width: 1000px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .login-container:hover {
+      transform: scale(1.02); 
+    }
+
+    .left-side {
+      flex: 1;
+      background-image: url('water-bg.jpg'); 
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .left-side::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 131, 197, 0.447); 
+      z-index: 1;
+    }
+
+    .left-side img {
+      z-index: 2;
+      width: 200px; 
+    }
+
+    .right-side {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #007bb5;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Form styling */
+    form {
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    /* Input fields */
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 15px 0;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    input:focus {
+      border-color: #007bb5; 
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #007bb5;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #007bb5; 
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .error-message.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .login-container {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .left-side {
+        height: 200px;
+      }
+
+      .right-side {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="left-side">
+      <img src="Logo.png" alt="Logo"> 
+    </div>
+
+    <div class="right-side">
+      <h1>Admin Log In</h1>
+      <form id="login-form" onsubmit="return handleLogin(event)">
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Password" required />
+        </div>
+        <button type="submit">Sign In</button>
+        <div id="error-message" class="error-message">Invalid email or password</div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function handleLogin(event) {
+      event.preventDefault(); 
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+
+      if (email === "admin@gmail.com" && password === "admin123") {
+        window.location.href = "dashboard.html"; 
+      } else {
+        errorMessage.classList.add('show'); 
+      }
+    }
+  </script>
+
+</body>
+</html>

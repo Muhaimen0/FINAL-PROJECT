@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WRWSAI Official Website</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333333;
+            overflow-x: hidden; 
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: #007bb5;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .navbar img {
+            height: 50px;
+            margin-right: 20px;
+        }
+        .navbar h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin-left: auto;
+            padding: 0;
+        }
+        .navbar ul li {
+            margin: 0 15px;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .navbar ul li a:hover, .navbar ul li a.active {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .navbar ul li a.active {
+            border: 2px solid #7b929c;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .hero {
+            position: relative;
+            text-align: left;
+            color: rgb(255, 255, 255);
+            overflow: hidden;
+            height: 100vh;
+            margin-top: 60px;
+        }
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .hero .content {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .hero h2 {
+            font-size: 43px;
+            margin: 0;
+        }
+        .hero p {
+            font-size: 22px;
+            margin: 10px 0;
+        }
+
+        /* Image Gallery Section */
+        .image-gallery {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+            overflow-y: auto;
+            max-height: 80vh;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .image-container {
+            width: 30%;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .image-container:hover {
+            transform: scale(1.05);
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-text {
+            padding: 15px;
+            text-align: center;
+        }
+        .image-text h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #007bb5;
+        }
+        .image-text p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .about-us {
+            background: url('water-surface-aesthetic-dark-blue-hd-3tayyq269jdtz2aq.jpg') no-repeat center center/cover; /* Correct background image */
+            padding: 300px; 
+            text-align: left; 
+            border-radius: 0px;
+            margin: 0px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #fff; 
+        }
+        .about-us h2 {
+            font-size: 50px;
+            color: #e5ebed;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+        }
+        .about-us p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffffff; 
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #007bb5;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #fcfbfa;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .about-us {
+                padding: 20px;
+            }
+            .about-us h2 {
+                font-size: 28px;
+            }
+            .about-us p {
+                font-size: 16px;
+            }
+            .image-container {
+                width: 100%; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img alt="WRWSAI Logo" src="Logo.png" />
+        <h1>WRWSAI</h1>
+        <ul>
+            <li><a class="active" href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Bills</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="login.html">Log In</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <img alt="WBSISHV is here to provide high-quality services and solutions tailored to the needs of the Soldiers Hills community, ensuring reliable delivery of clean water" src="bggg.jpg" />
+        <div class="content">
+            <h2>Welcome to the Official Website of WBSISHV</h2>
+            <p>WBSISHV is here to provide high-quality services and solutions tailored to the needs of the Soldiers Hills community, ensuring reliable delivery of clean water.</p>
+        </div>
+    </div>
+
+    <div class="image-gallery">
+        <!-- Image 1 -->
+        <div class="image-container">
+            <img src="duedate.jpg" alt="Image 1">
+            <div class="image-text">
+                <h2>Know Your Payment Due Dates</h2>
+                <p>Monday-Friday (8:00 AM - 11:30 AM, 12:30 PM - 4:00 PM) WRWSAI accepts payments on weekdays, including the day before the due date and on the actual due date.</p>
+            </div>
+        </div>
+
+        <!-- Image 2 -->
+        <div class="image-container">
+            <img src="fafa.jpeg" alt="Image 2">
+            <div class="image-text">
+                <h2>WRWSAI Water Maintenance</h2>
+                <p>Monthly WRWSAI conducts regular monthly inspections and maintenance to ensure continuous and efficient water delivery to residents.</p>
+            </div>
+        </div>
+
+        <!-- Image 3 -->
+        <div class="image-container">
+            <img src="qualityservicestamp.jpg" alt="Image 3">
+            <div class="image-text">
+                <h2>Quality Policy and Services</h2>
+                <p>In order to meet the demands and expectations of its customers and other stakeholders, WRWSAI is committed to operating effectively and consistently, providing safe, sufficient, and clean water to all residents.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <div class="about-us">
+        <h2>About Us</h2>
+        <p>WRWSAI is dedicated to providing the Soldiers Hills community with sustainable, clean water solutions, while also educating residents on responsible water usage.</p>
+        <p>Our project aims to provide a simple and effective solution to the water management issues faced by the residents. Through this web system, residents can easily access their water consumption and pay their bills online. We hope to contribute positively to the community by improving the efficiency of water utility services.</p>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2024 WRWSAI. All rights reserved.</p>
+        <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a>
+        </p>
+        <p>Follow us on 
+            <a href="#"><i class="fab fa-facebook"></i></a> 
+            <a href="#"><i class="fab fa-twitter"></i></a> 
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </p>
+    </div>
+</body>
+</html>
